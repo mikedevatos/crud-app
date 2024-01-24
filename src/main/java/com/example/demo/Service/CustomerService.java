@@ -6,9 +6,13 @@ import com.example.demo.repo.CustomerRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -28,6 +32,17 @@ public class CustomerService {
         return mapper.map(customer, CustomerDTO.class);
 
     }
+
+
+    public List<Customer> findAllbyPage(Integer page, int size){
+        Pageable paging = PageRequest.of(page, size);
+        Page<Customer> pagedCusto = repository.findAll(paging);
+        List<Customer> custo = pagedCusto.getContent();
+        return custo;
+    }
+
+
+
 
     public CustomerDTO updateCustomer(Long id, CustomerDTO updatedCustomerDTO) {
         Customer existingCustomer = repository.findById(id).orElseThrow(EntityNotFoundException::new);
