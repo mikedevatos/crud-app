@@ -1,0 +1,11 @@
+import type {NextAuthOptions} from 'next-auth';
+import { signIn } from 'next-auth/react';
+
+export const options:NextAuthOptions= {
+    providers: [],
+    pages: {
+        signIn
+    }
+
+
+}

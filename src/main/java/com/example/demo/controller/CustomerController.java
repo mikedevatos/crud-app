@@ -34,12 +34,15 @@ public class CustomerController {
     }
 
 
+
+
     @GetMapping("/{page}/{size}")
     public ResponseEntity<List<Customer>> getPageCustomers(@PathVariable Integer page, @PathVariable int size) {
 
-//        long total = service.count();
 
-        List<Customer> customers = service.findAllbyPage(page,size);
+//        long total = service.count();
+        Integer SIZE = 5;
+        List<Customer> customers = service.findAllbyPage(page,SIZE);
 
 //        CustomersDTO customDTO=new CustomersDTO();
 //        customDTO.setCustomer(customers);
